@@ -100,7 +100,8 @@ header .fa-bars{
     display: flex;
     align-items: center;
     min-height: 100vh;
-    background: url(../flower.png) no-repeat;
+    /* flower.png is expected to be in the same folder as home.html/home.css */
+    background: url('flower.png') no-repeat;
     background-size: cover;
     background-position: center;
 }
