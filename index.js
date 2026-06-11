@@ -1,6 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
+
+const dns = require('dns');
+dns.setDefaultResultOrder('ipv4first');
+
 require('dotenv').config();
 
 const app = express();
