@@ -83,6 +83,20 @@ app.post('/api/verify-otp', (req, res) => {
     }
 });
 
+app.get('/debug', (req, res) => {
+    const emailUserPresent = Boolean(process.env.EMAIL_USER);
+    const emailPassPresent = Boolean(process.env.EMAIL_PASS);
+
+    res.json({
+        success: true,
+        env: {
+            emailUserPresent,
+            emailPassPresent,
+            emailUser: emailUserPresent ? process.env.EMAIL_USER : null
+        }
+    });
+});
+
 app.get('/', (req, res) => {
     res.send("BloomFresh Backend Server is Running Successfully!");
 });
