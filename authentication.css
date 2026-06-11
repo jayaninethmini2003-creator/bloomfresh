@@ -66,6 +66,7 @@ form {
 .form-box.register {
   visibility: hidden;
 }
+
 .container.active .form-box.register {
   visibility: visible;
 }
@@ -118,6 +119,7 @@ form {
 .forgot-link {
   margin: -15px 0 15px;
 }
+
 .forgot-link a {
   font-size: 14.5px;
   color: #333;
@@ -190,6 +192,7 @@ form {
   left: 0;
   transition-delay: 1.2s;
 }
+
 .container.active .toggle-panel.toggle-left {
   left: -50%;
   transition-delay: 0.6s;
@@ -199,6 +202,7 @@ form {
   right: -50%;
   transition-delay: 0.6s;
 }
+
 .container.active .toggle-panel.toggle-right {
   right: 0;
   transition-delay: 1.2s;
@@ -216,6 +220,7 @@ form {
   box-shadow: none;
 }
 
+/* Responsive CSS for Mobile Devices */
 @media screen and (max-width: 650px) {
   .container {
     height: calc(100vh - 40px);
@@ -254,9 +259,11 @@ form {
     width: 100%;
     height: 30%;
   }
+
   .toggle-panel.toggle-left {
     top: 0;
   }
+
   .toggle-panel.toggle-right {
     right: 0;
     bottom: -30%;

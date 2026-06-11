@@ -103,7 +103,7 @@ if (registerForm && otpForm) {
 }
 
 // ==========================================
-// LOGIN VERIFICATION (මෙතනයි වෙනස් කළේ 🚀)
+// LOGIN VERIFICATION
 // ==========================================
 const loginForm = document.getElementById('login-form');
 const loginUsernameInput = document.getElementById('login-username');
@@ -117,7 +117,7 @@ if (loginForm) {
         const enteredUsername = loginUsernameInput.value.trim();
         const enteredPassword = loginPasswordInput.value.trim();
 
-        // LocalStorage එකේ save වෙලා තියෙන දේවල් ගන්නවා
+        // LocalStorage එකේ save වෙලා thiyena දේවල් ගන්නවා
         const savedUsername = localStorage.getItem('bloomUsername');
         const savedPassword = localStorage.getItem('bloomPassword');
 
