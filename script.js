@@ -38,7 +38,7 @@ if (registerForm && otpForm) {
         regBtn.disabled = true;
 
         try {
-            const response = await fetch(`${API_URL}/send-otp`, {
+            const response = await fetch(`${API_URL}/api/send-otp`, {  
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: email })
@@ -73,7 +73,7 @@ if (registerForm && otpForm) {
         verifyBtn.disabled = true;
 
         try {
-            const response = await fetch(`${API_URL}/verify-otp`, {
+            const response = await fetch(`${API_URL}/api/verify-otp`, {  
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: email, otp: otp })
