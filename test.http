@@ -1,0 +1,18 @@
+### Function 1: OTP එකක් Email එකට යැවීම
+POST http://localhost:5000/api/send-otp
+Content-Type: application/json
+
+{
+    "email": "webbloomfresh@gmail.com"
+}
+
+###
+
+### Function 2: ලැබුණු OTP එක Verify කිරීම
+POST http://localhost:5000/api/verify-otp
+Content-Type: application/json
+
+{
+    "email": "webbloomfresh@gmail.com",
+    "otp": "9951" 
+}
