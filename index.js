@@ -20,15 +20,6 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-// Verify transporter at startup to catch auth/network issues early
-transporter.verify(function(error, success) {
-    if (error) {
-        console.error('Nodemailer verify failed:', error);
-    } else {
-        console.log('Nodemailer transporter is ready');
-    }
-});
-
 // --- FUNCTION 1: SEND OTP ---
 app.post('/api/send-otp', (req, res) => {
     const email = req.body.email ? req.body.email.trim() : '';
@@ -51,8 +42,7 @@ app.post('/api/send-otp', (req, res) => {
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             console.error("Email Error:", error);
-            // Return error message for debugging (remove in production)
-            return res.status(500).json({ success: false, message: "Email sending failed!", error: error.message });
+            return res.status(500).json({ success: false, message: "Email sending failed!" });
         }
         res.status(200).json({ success: true, message: "OTP sent successfully!" });
     });
@@ -81,20 +71,6 @@ app.post('/api/verify-otp', (req, res) => {
     } else {
         return res.status(400).json({ success: false, message: "Invalid OTP! Try again." });
     }
-});
-
-app.get('/debug', (req, res) => {
-    const emailUserPresent = Boolean(process.env.EMAIL_USER);
-    const emailPassPresent = Boolean(process.env.EMAIL_PASS);
-
-    res.json({
-        success: true,
-        env: {
-            emailUserPresent,
-            emailPassPresent,
-            emailUser: emailUserPresent ? process.env.EMAIL_USER : null
-        }
-    });
 });
 
 app.get('/', (req, res) => {
