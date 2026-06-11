@@ -20,6 +20,15 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+// Verify transporter at startup to catch auth/network issues early
+transporter.verify(function(error, success) {
+    if (error) {
+        console.error('Nodemailer verify failed:', error);
+    } else {
+        console.log('Nodemailer transporter is ready');
+    }
+});
+
 // --- FUNCTION 1: SEND OTP ---
 app.post('/api/send-otp', (req, res) => {
     const email = req.body.email ? req.body.email.trim() : '';
@@ -42,7 +51,8 @@ app.post('/api/send-otp', (req, res) => {
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             console.error("Email Error:", error);
-            return res.status(500).json({ success: false, message: "Email sending failed!" });
+            // Return error message for debugging (remove in production)
+            return res.status(500).json({ success: false, message: "Email sending failed!", error: error.message });
         }
         res.status(200).json({ success: true, message: "OTP sent successfully!" });
     });
