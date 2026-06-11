@@ -25,7 +25,7 @@ const otpInput = document.getElementById('otp-input');
 const regBtn = document.getElementById('reg-btn');
 const verifyBtn = document.getElementById('verify-btn');
 
-const API_URL = 'https://bloomfresh.onrender.com/api'; 
+const API_URL = 'https://bloomfresh.onrender.com'; 
 
 if (registerForm && otpForm) {
     
