@@ -73,6 +73,10 @@ app.post('/api/verify-otp', (req, res) => {
     }
 });
 
+app.get('/', (req, res) => {
+    res.send("BloomFresh Backend Server is Running Successfully!");
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running smoothly on port ${PORT}`);
 });
