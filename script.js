@@ -51,7 +51,8 @@ if (registerForm && otpForm) {
                 registerForm.style.display = "none";
                 otpForm.style.display = "block";
             } else {
-                alert("Error: " + data.message);
+                const details = data.error ? `\nDetails: ${data.error}` : "";
+                alert(`Error: ${data.message}${details}`);
                 regBtn.innerText = "Register";
                 regBtn.disabled = false;
             }
@@ -89,7 +90,8 @@ if (registerForm && otpForm) {
                 alert("Registration Successful! Welcome to BloomFresh.");
                 window.location.href = "home.html"; 
             } else {
-                alert("Invalid OTP: " + data.message);
+                const details = data.error ? `\nDetails: ${data.error}` : "";
+                alert(`Invalid OTP: ${data.message}${details}`);
                 verifyBtn.innerText = "Verify & Login";
                 verifyBtn.disabled = false;
             }
