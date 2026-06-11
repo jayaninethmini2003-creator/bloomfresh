@@ -17,11 +17,16 @@ const PORT = process.env.PORT || 5000;
 let otpStore = {};
 
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-    }
+  host: process.env.EMAIL_HOST,       // This will read smtp.gmail.com
+  port: Number(process.env.EMAIL_PORT), // This will read 587
+  secure: false,                      // MUST be false for port 587
+  auth: {
+    user: process.env.EMAIL_USER,     // This will read webbloomfresh@gmail.com
+    pass: process.env.EMAIL_PASS,     // This will read ndfhayofqraoubkc
+  },
+  tls: {
+    rejectUnauthorized: false         // This helps prevent Render from blocking self-signed certificates
+  }
 });
 
 // --- FUNCTION 1: SEND OTP ---
