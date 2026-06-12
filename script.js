@@ -2,7 +2,6 @@ const container = document.querySelector('.container');
 const registerBtn = document.querySelector('.register-btn');
 const loginBtn = document.querySelector('.login-btn');
 
-// Animation Toggle
 if (registerBtn && loginBtn && container) {
     registerBtn.addEventListener('click', () => {
         container.classList.add('active');
@@ -13,9 +12,7 @@ if (registerBtn && loginBtn && container) {
     });
 }
 
-// ==========================================
-// REGISTRATION & OTP INTEGRATION
-// ==========================================
+
 const registerForm = document.getElementById('register-form');
 const otpForm = document.getElementById('otp-form');
 const regUsernameInput = document.getElementById('reg-username');
@@ -29,7 +26,6 @@ const API_URL = 'https://bloomfresh.onrender.com';
 
 if (registerForm && otpForm) {
     
-    // 1. Send OTP
     registerForm.addEventListener('submit', async (e) => {
         e.preventDefault(); 
         const email = regEmailInput.value.trim();
@@ -63,7 +59,6 @@ if (registerForm && otpForm) {
         }
     });
 
-    // 2. Verify OTP & Save User Info
     otpForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const email = regEmailInput.value.trim();
@@ -82,7 +77,6 @@ if (registerForm && otpForm) {
             const data = await response.json();
             
             if (response.ok && data.success) {
-                // වැඩේ හරි නම් Username එකයි Password එකයි LocalStorage එකේ Save කරනවා
                 localStorage.setItem('bloomUsername', regUsernameInput.value.trim());
                 localStorage.setItem('bloomPassword', regPasswordInput.value.trim());
 
@@ -102,9 +96,6 @@ if (registerForm && otpForm) {
     });
 }
 
-// ==========================================
-// LOGIN VERIFICATION
-// ==========================================
 const loginForm = document.getElementById('login-form');
 const loginUsernameInput = document.getElementById('login-username');
 const loginPasswordInput = document.getElementById('login-password');
@@ -112,40 +103,35 @@ const loginSubmitBtn = document.getElementById('login-submit-btn');
 
 if (loginForm) {
     loginForm.addEventListener('submit', (e) => {
-        e.preventDefault(); // කෙලින්ම home.html එකට යන එක නවත්තනවා
+        e.preventDefault(); 
 
         const enteredUsername = loginUsernameInput.value.trim();
         const enteredPassword = loginPasswordInput.value.trim();
 
-        // LocalStorage එකේ save වෙලා thiyena දේවල් ගන්නවා
         const savedUsername = localStorage.getItem('bloomUsername');
         const savedPassword = localStorage.getItem('bloomPassword');
 
-        // 1. එකවුන්ට් එකක් තියෙනවද කියලා බලනවා
         if (!savedUsername || !savedPassword) {
             alert("Account not found! Please register first.");
             return;
         }
 
-        // 2. Google එකෙන් හදපු එකවුන්ට් එකක්ද කියලා බලනවා
         if (savedPassword === 'GOOGLE_SIGNED_IN') {
             alert("This account is linked with Google. Please click the Google icon below to login.");
             return;
         }
 
-        // 3. Username එක හරිද බලනවා
         if (enteredUsername !== savedUsername) {
             alert("Invalid Username! Please check your username.");
             return;
         }
 
-        // 4. Password එක හරිද බලනවා
         if (enteredPassword === savedPassword) {
             alert("Login Successful!");
             window.location.href = "home.html"; 
         } else {
             alert("Invalid Password! Please try again.");
-            loginPasswordInput.value = ""; // ගහපු password එක මකනවා
+            loginPasswordInput.value = ""; 
         }
     });
 }

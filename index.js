@@ -13,7 +13,6 @@ app.use(cors());
 
 const PORT = process.env.PORT || 5000;
 
-// OTP සේව් කරගන්න තැන
 let otpStore = {};
 
 const transporter = nodemailer.createTransport({
@@ -29,7 +28,6 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-// --- FUNCTION 1: SEND OTP ---
 app.post('/api/send-otp', (req, res) => {
     const email = req.body.email ? req.body.email.trim() : '';
 
@@ -39,8 +37,7 @@ app.post('/api/send-otp', (req, res) => {
 
     const otp = Math.floor(1000 + Math.random() * 9000).toString();
     otpStore[email] = otp; 
-    console.log(`[SERVER] OTP for ${email} is ${otp}`); // Terminal එකේ බලාගන්න පුළුවන්
-
+    console.log(`[SERVER] OTP for ${email} is ${otp}`); 
     const mailOptions = {
         from: process.env.EMAIL_USER,
         to: email,
@@ -57,9 +54,7 @@ app.post('/api/send-otp', (req, res) => {
     });
 });
 
-// --- FUNCTION 2: VERIFY OTP ---
 app.post('/api/verify-otp', (req, res) => {
-    // Spaces අයින් කරලාම ගන්නවා (.trim() පාවිච්චි කරලා)
     const email = req.body.email ? req.body.email.trim() : '';
     const otp = req.body.otp ? req.body.otp.trim() : '';
 
@@ -74,7 +69,7 @@ app.post('/api/verify-otp', (req, res) => {
     }
 
     if (savedOtp === otp) {
-        delete otpStore[email]; // වැඩේ හරි ගියාම OTP එක මකනවා
+        delete otpStore[email]; 
         console.log(`[SERVER] User ${email} verified successfully!`);
         return res.status(200).json({ success: true, message: "Authentication Successful!" });
     } else {
