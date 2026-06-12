@@ -17,8 +17,8 @@ const PORT = process.env.PORT || 5000;
 let otpStore = {};
 
 const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
+    host: process.env.EMAIL_HOST,
+    port: process.env.EMAIL_PORT,
     secure: false,
     auth: {
         user: process.env.EMAIL_USER,
